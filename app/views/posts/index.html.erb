@@ -8,10 +8,11 @@
    <% end %>
  </div>
 </div>
-<div class="row">
 
+<div class="row">
 <div class="col-md-8">
-  <% @posts.each do |post| %>
+
+  <%= @posts.each do |post| %>
   <div class="article">
     <h2>タイトル：<%= post.title %></h2>
     <p>カテゴリ：<%= post.category %></p>
@@ -25,10 +26,10 @@
 
 <div class="col-md-4">
   <div class="thumbnail">
-    <%= image_tag Author.first.image_url, alt: "著者イメージ" %>
+
     <div class="caption">
-      <h3>著者名：<%= Author.first.name %></h3>
-      <p>詳細：<%= Author.first.description %></p>
+      <h3>著者名：<%= User.name %></h3>
+
     </div>
   </div>
   <div class="list-group">

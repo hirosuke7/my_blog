@@ -1,12 +1,16 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: [ :show, :edit, :update, :destroy]
+
   def index
     @q = Post.order(created_at: :desc).ransack(params[:q])
     @posts = @q.result.page(params[:page]).per(3)
     @new_posts = Post.find_newest_article
-    @author = Author.first
+    @user = User.all
   end
+
   def show
+    @post = Post.new # これをform_withで使う
   end
 
   def new
@@ -35,7 +39,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :category)
+    params.require(:post).permit(:title, :body, :category, :user_id)
   end
 
   def set_post
